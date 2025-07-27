@@ -53,35 +53,37 @@ export default function GameBoard() {
     }
   }
 
-  const handleStand = async () => {
-    let newDeck = [...deck]
-    let dealerHand = [...dealerCards]
-    setShowDealerSecondCard(true)
+  // GameBoard.tsx içinden snippet
+const handleStand = async () => {
+  const newDeck = [...deck]      // let -> const
+  const dealerHand = [...dealerCards]  // let -> const
+  setShowDealerSecondCard(true)
 
-    while (calculateScore(dealerHand) < 17) {
-      const card = drawCard(newDeck)
-      dealerHand.push(card)
-      setDealerCards([...dealerHand])
-      await sleep(800)
-    }
-
-    setDealerCards(dealerHand)
-    setDeck(newDeck)
-    await sleep(600)
-
-    const playerScore = calculateScore(playerCards)
-    const dealerScore = calculateScore(dealerHand)
-
-    setIsGameOver(true)
-
-    if (dealerScore > 21 || playerScore > dealerScore) {
-      setMessage("🎉 You win!")
-    } else if (dealerScore === playerScore) {
-      setMessage("🤝 It's a tie.")
-    } else {
-      setMessage("💀 Dealer wins.")
-    }
+  while (calculateScore(dealerHand) < 17) {
+    const card = drawCard(newDeck)
+    dealerHand.push(card)
+    setDealerCards([...dealerHand])
+    await sleep(800)
   }
+
+  setDealerCards(dealerHand)
+  setDeck(newDeck)
+  await sleep(600)
+
+  const playerScore = calculateScore(playerCards)
+  const dealerScore = calculateScore(dealerHand)
+
+  setIsGameOver(true)
+
+  if (dealerScore > 21 || playerScore > dealerScore) {
+    setMessage("🎉 You win!")
+  } else if (dealerScore === playerScore) {
+    setMessage("🤝 It's a tie.")
+  } else {
+    setMessage("💀 Dealer wins.")
+  }
+}
+
 
   return (
     <div className="flex flex-col items-center gap-6 mt-10 max-w-screen-md w-full">

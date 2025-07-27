@@ -44,6 +44,7 @@ export function calculateScore(hand: string[]): number {
 
   return score
 }
+// blackjackLogic.ts içinden snippet
 export function calculateScoreDetailed(hand: string[] | undefined): string {
   if (!hand || hand.length === 0 || hand.some(card => card === undefined)) return "0"
 
@@ -63,7 +64,7 @@ export function calculateScoreDetailed(hand: string[] | undefined): string {
     }
   }
 
-  let scores: number[] = [score]
+  const scores: number[] = [score]  // let -> const
   for (let i = 0; i < aces; i++) {
     score -= 10
     scores.push(score)
@@ -77,6 +78,7 @@ export function calculateScoreDetailed(hand: string[] | undefined): string {
     return uniqueScores.join(" or ")
   }
 }
+
 
 
 
